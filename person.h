@@ -4,19 +4,19 @@
 #include <string>
 #include <fstream>
 #include "LIST.h"
-
-class personManager{
-    struct person{
+struct person{
      std::string name;
      int score;
 };
+class personManager{
+    
     person PERSON;
     list<person> LIST;
     public:
     void loadFile(std::string name);
     void print();
     void insert();
-
+    void searchAndRemove(person& me);
 };
 
 

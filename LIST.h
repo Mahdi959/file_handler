@@ -7,7 +7,6 @@ class list{
     private:
         BaseData data;
         list<BaseData> *next;
-        list<BaseData> *curr;
         list<BaseData> *head;
       
 
@@ -15,7 +14,6 @@ class list{
         list(){
             next = nullptr;
             head = nullptr;
-            curr = nullptr;
         }
         void add(BaseData data){
             if(head==nullptr){
@@ -25,7 +23,7 @@ class list{
             }
            else{
                 
-                curr =head;
+                list<BaseData>*curr =head;
                 while(curr->next){
                     curr = curr->next;
                 }
@@ -34,15 +32,31 @@ class list{
            }
         }
         void print(){   
-            curr = head;
+            list<BaseData>* curr = head;
+            
             while(curr){
                 std::cout<<curr->data.name<<" "<<curr->data.score<<std::endl;
                 curr = curr->next;
             }
             
         }
-        void searchAndRemove(list<BaseData> target){
-
+        void searchAndRemove(BaseData& target){
+            list<BaseData>* curr = head;
+            while((curr->data.name)!= target.name){
+                curr = curr->next;
+            }
+            if((curr->data.name)== target.name){
+                remove(curr);
+              std::cout<<"found"<<std::endl;
+            }
+            else{
+                
+                std::cout<<"not found";
+            }
         }
-        
+        void remove (list<BaseData>*& target){
+            list<BaseData>* temp = target;
+            target = target->next;
+            delete temp;
+        }
 };
