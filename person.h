@@ -16,7 +16,7 @@ class personManager{
     void loadFile(std::string name);
     void print();
     void insert();
-    void searchAndRemove(person& me);
+    void searchAndRemove(person me);
 };
 
 

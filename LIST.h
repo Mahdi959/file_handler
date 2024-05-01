@@ -8,6 +8,7 @@ class list{
         BaseData data;
         list<BaseData> *next;
         list<BaseData> *head;
+        list<BaseData> *curr;
       
 
     public:
@@ -16,14 +17,17 @@ class list{
             head = nullptr;
         }
         void add(BaseData data){
+             
             if(head==nullptr){
+               
                 this->data =data;
                 head = this;
+                curr = this;
                 
             }
            else{
                 
-                list<BaseData>*curr =head;
+               
                 while(curr->next){
                     curr = curr->next;
                 }
@@ -34,7 +38,7 @@ class list{
         void print(){   
             list<BaseData>* curr = head;
             
-            while(curr){
+            while(curr!=nullptr){
                 std::cout<<curr->data.name<<" "<<curr->data.score<<std::endl;
                 curr = curr->next;
             }
@@ -42,7 +46,7 @@ class list{
         }
         void searchAndRemove(BaseData& target){
             list<BaseData>* curr = head;
-            while((curr->data.name)!= target.name){
+            while((curr->data.name)!= target.name && curr != nullptr){
                 curr = curr->next;
             }
             if((curr->data.name)== target.name){
@@ -55,8 +59,20 @@ class list{
             }
         }
         void remove (list<BaseData>*& target){
-            list<BaseData>* temp = target;
-            target = target->next;
+            if(target == nullptr)return;
+            if(target->next == nullptr){
+                delete target;
+                target = nullptr;
+                return; 
+            }
+            
+            list<BaseData>* temp = new list<BaseData>;
+            temp->data = target->next->data;
+            temp->next = target->next->next;
+            
+            delete target->next;
+            target->next = temp->next;
+            target->data = temp->data;
             delete temp;
         }
 };

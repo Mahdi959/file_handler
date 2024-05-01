@@ -14,6 +14,6 @@ void personManager::print(){
 void personManager::insert(){
     //wokring
 }
-void personManager::searchAndRemove(person& me){
+void personManager::searchAndRemove(person me){
     LIST.searchAndRemove(me);
 }
