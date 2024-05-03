@@ -13,4 +13,7 @@ int main(){
     std::cin>>me.name>>me.score;
     Person.searchAndRemove(me);
     Person.print();
+    std::cin>>me.name>>me.score;
+    Person.insert(me);
+    Person.print();
 }

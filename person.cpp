@@ -9,10 +9,10 @@ void personManager::loadFile(std::string name){
 void personManager::print(){
 
     LIST.print();
- //working
+
 }
-void personManager::insert(){
-    //wokring
+void personManager::insert(person newPerson){
+    LIST.add(newPerson);
 }
 void personManager::searchAndRemove(person me){
     LIST.searchAndRemove(me);

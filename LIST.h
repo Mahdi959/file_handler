@@ -15,14 +15,15 @@ class list{
         list(){
             next = nullptr;
             head = nullptr;
+            
         }
         void add(BaseData data){
-             
+             curr = this;
             if(head==nullptr){
                
                 this->data =data;
                 head = this;
-                curr = this;
+                
                 
             }
            else{
