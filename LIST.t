@@ -62,9 +62,10 @@ void list<BaseData>:: add(BaseData data){
                 
                
                 while(curr->next){
-                    this->prev = curr;
+                    
                     this->curr = curr->next;
                 }
+                prev =curr;
                 curr-> next = new list<BaseData>;
                 curr->next->data = data;
            }
