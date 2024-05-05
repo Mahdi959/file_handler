@@ -1,5 +1,5 @@
  template <typename BaseData>
-list<BaseData>::list(){
+list<BaseData>::list(){ //constructor
             next = nullptr;
             head = nullptr;
             curr = nullptr;
@@ -7,35 +7,28 @@ list<BaseData>::list(){
         }
 template <typename BaseData>
 void list<BaseData>:: remove (list<BaseData>*& target){
-            if(target == nullptr)return;
-            if(target->next == nullptr){
-                target->prev->next = nullptr;
+            if(target == nullptr)return; //nothing to remove
+            if(target->next == nullptr){//last node deletion
+                target->prev->next = nullptr; //to avoid prev pointing to freed memory after target deleted
                
                 delete target;
-                target = nullptr;
+                target = nullptr; 
                 return; 
             }
+            //unlinking target to delete it
+            target->prev->next = target->next;
+            target->next->prev = target->prev;
             
-            list<BaseData>* temp = new list<BaseData>;
-            temp->data = target->next->data;
-            temp->next = target->next->next;
-            temp->prev = target->next->prev;
-            
-            delete target->next;
-            target->next = temp->next;
-            target->data = temp->data;
-            target->prev = temp->prev;
-            delete temp;
+            delete target;
         }
 template <typename BaseData>
 void list<BaseData>:: searchAndRemove(BaseData& target){
-            list<BaseData>* curr = head;
-           while(curr != nullptr && (curr->data.name != target.name)){
+           curr = head;
+           while(curr != nullptr && (curr->data.name != target.name)){//finding target to be deleted
              curr = curr->next;
             }
             if((curr->data.name)== target.name){
                 remove(curr);
-              std::cout<<"found"<<std::endl;
             }
             else{
                 
@@ -45,7 +38,7 @@ void list<BaseData>:: searchAndRemove(BaseData& target){
 template <typename BaseData>      
 void list<BaseData>:: print(){   
             curr = head;
-            
+            //print list
             while(curr){
                 std::cout<<curr->data.name<<" "<<curr->data.score<<std::endl;
                 curr = curr->next;
@@ -55,7 +48,7 @@ void list<BaseData>:: print(){
 template <typename BaseData>
 void list<BaseData>:: add(BaseData data){
              this->curr = this;
-            if(head==nullptr){
+            if(head==nullptr){ // add for first node
                
                 this->data =data;
                 this->head = this;
@@ -65,16 +58,13 @@ void list<BaseData>:: add(BaseData data){
            else{
                 
                
-                while(curr->next){
+                while(curr->next!=nullptr){ //finding the space for new node
                     
                     curr = curr->next;
                 }
-                prev = curr;
+                prev = curr; // prev as temporary data holder
                 curr-> next = new list<BaseData>;
                 curr->next->data = data;
-                curr->next->prev = prev;
-                 
-                 
-                 std::cout<<prev->data.name;
+                curr->next->prev = prev; //
            }
         };

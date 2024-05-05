@@ -10,7 +10,7 @@ int main(){
     Person.loadFile(fileName);
     while(true){
         
-        Person.print();
+         Person.print();
         
         // File.add();
         std::cout<<"1. Add Person\n";
