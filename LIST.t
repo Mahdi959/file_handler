@@ -2,13 +2,15 @@
 list<BaseData>::list(){
             next = nullptr;
             head = nullptr;
-            
+            curr = nullptr;
+            prev = nullptr;
         }
 template <typename BaseData>
 void list<BaseData>:: remove (list<BaseData>*& target){
             if(target == nullptr)return;
             if(target->next == nullptr){
-                prev->next = nullptr;
+                target->prev->next = nullptr;
+               
                 delete target;
                 target = nullptr;
                 return; 
@@ -17,10 +19,12 @@ void list<BaseData>:: remove (list<BaseData>*& target){
             list<BaseData>* temp = new list<BaseData>;
             temp->data = target->next->data;
             temp->next = target->next->next;
+            temp->prev = target->next->prev;
             
             delete target->next;
             target->next = temp->next;
             target->data = temp->data;
+            target->prev = temp->prev;
             delete temp;
         }
 template <typename BaseData>
@@ -40,7 +44,7 @@ void list<BaseData>:: searchAndRemove(BaseData& target){
         }
 template <typename BaseData>      
 void list<BaseData>:: print(){   
-            list<BaseData>* curr = head;
+            curr = head;
             
             while(curr){
                 std::cout<<curr->data.name<<" "<<curr->data.score<<std::endl;
@@ -63,10 +67,14 @@ void list<BaseData>:: add(BaseData data){
                
                 while(curr->next){
                     
-                    this->curr = curr->next;
+                    curr = curr->next;
                 }
-                prev =curr;
+                prev = curr;
                 curr-> next = new list<BaseData>;
                 curr->next->data = data;
+                curr->next->prev = prev;
+                 
+                 
+                 std::cout<<prev->data.name;
            }
         };
