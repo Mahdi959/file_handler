@@ -1,12 +1,10 @@
- template <typename BaseData>
+template <typename BaseData>
 list<BaseData>::list(){ //constructor
-            next = nullptr;
             head = nullptr;
             curr = nullptr;
-            prev = nullptr;
         }
 template <typename BaseData>
-void list<BaseData>:: remove (list<BaseData>*& target){
+void list<BaseData>:: remove (Node *& target){
             if(target == nullptr)return; //nothing to remove
             if(target->next == nullptr){//last node deletion
                 target->prev->next = nullptr; //to avoid prev pointing to freed memory after target deleted
@@ -15,7 +13,7 @@ void list<BaseData>:: remove (list<BaseData>*& target){
                 target = nullptr; 
                 return; 
             }
-            //unlinking target to delete it
+            //unlinking target to delete it(Linking other Nodes)
             target->prev->next = target->next;
             target->next->prev = target->prev;
             
@@ -23,7 +21,7 @@ void list<BaseData>:: remove (list<BaseData>*& target){
         }
 template <typename BaseData>
 void list<BaseData>:: searchAndRemove(BaseData& target){
-           curr = head;
+            Node* curr = head;
            while(curr != nullptr && (curr->data.name != target.name)){//finding target to be deleted
              curr = curr->next;
             }
@@ -37,7 +35,7 @@ void list<BaseData>:: searchAndRemove(BaseData& target){
         }
 template <typename BaseData>      
 void list<BaseData>:: print(){   
-            curr = head;
+            Node* curr = head;
             //print list
             while(curr){
                 std::cout<<curr->data.name<<" "<<curr->data.score<<std::endl;
@@ -47,24 +45,18 @@ void list<BaseData>:: print(){
         }
 template <typename BaseData>
 void list<BaseData>:: add(BaseData data){
-             this->curr = this;
+             Node *curr = head;
             if(head==nullptr){ // add for first node
-               
-                this->data =data;
-                this->head = this;
-                
-                
+                head = new Node;
+                head->data =data;   
             }
-           else{
-                
-               
-                while(curr->next!=nullptr){ //finding the space for new node
-                    
+           else{         
+                while(curr->next!=nullptr){ //finding the space for new node         
                     curr = curr->next;
                 }
-                prev = curr; // prev as temporary data holder
-                curr-> next = new list<BaseData>;
+                Node* temp = curr; // prev as temporary data holder
+                curr-> next = new Node;
                 curr->next->data = data;
-                curr->next->prev = prev; //
+                curr->next->prev = temp; //
            }
         };

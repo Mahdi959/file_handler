@@ -7,18 +7,22 @@ class list{
      
     
     private:
-        BaseData data;
-        list<BaseData> *next;
-        list<BaseData> *head;
-        list<BaseData> *curr;
-        list<BaseData> *prev;
+        
+        struct Node{
+            BaseData data;
+            Node *prev = nullptr;
+            Node *next = nullptr;
 
+        };    
+        Node *head;
+        Node *curr;
+        
     public:
         list();//Constructor
         void add(BaseData data);
         void print();
         void searchAndRemove(BaseData& target);
-        void remove (list<BaseData>*& target);
+        void remove (Node*& target);
 };
 #include "LIST.t"
 #endif
